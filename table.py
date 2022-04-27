@@ -49,18 +49,18 @@ class ui(QWidget):
 
         # 一行一行把dataframe的資料丟到QTableWidget裡面
         for index, row in df.iterrows():
-            rowCount = self.table.rowCount()
-            newRowIdx = rowCount
-            self.table.setRowCount(rowCount + 1)
-            
             # 設定從dataframe讀出來的格式
             id = '{:04d}'.format(row['stock_id'])
             sell_date = row['sell_date']
             profit = '{:0.2f}'.format(row['profit'])
             
-            self.table.setItem(newRowIdx, 0, QTableWidgetItem(id))
-            self.table.setItem(newRowIdx, 1, QTableWidgetItem(sell_date))
-            self.table.setItem(newRowIdx, 2, QTableWidgetItem(profit))
+            rowCount = self.table.rowCount()
+            
+            self.table.setItem(rowCount, 0, QTableWidgetItem(id))
+            self.table.setItem(rowCount, 1, QTableWidgetItem(sell_date))
+            self.table.setItem(rowCount, 2, QTableWidgetItem(profit))
+            
+            self.table.setRowCount(rowCount + 1)
 
         self.settext('讀get_df的資料，加在table最後面')
 
